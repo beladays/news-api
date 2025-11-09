@@ -1,0 +1,51 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+// Configuração do banco
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// ============================
+// MODELOS DO PROJETO
+// ============================
+
+// Usuário cadastrado no app
+model Usuario {
+  id         Int        @id @default(autoincrement())
+  nome       String
+  email      String     @unique
+  senha      String
+  favoritos  Favorito[]
+  criadoEm   DateTime   @default(now())
+}
+
+// Notícia (pode vir da API externa)
+model Noticia {
+  id           Int         @id @default(autoincrement())
+  titulo       String
+  descricao    String?
+  urlImagem    String?
+  conteudo     String?
+  publicadaEm  DateTime?
+  favoritos    Favorito[]
+}
+
+// Relação entre usuário e notícia favorita
+model Favorito {
+  id         Int       @id @default(autoincrement())
+  usuarioId  Int
+  noticiaId  Int
+  criadoEm   DateTime  @default(now())
+
+  usuario    Usuario   @relation(fields: [usuarioId], references: [id])
+  noticia    Noticia   @relation(fields: [noticiaId], references: [id])
+}
