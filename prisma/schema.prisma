@@ -34,7 +34,7 @@ model Noticia {
   titulo       String
   descricao    String?
   urlImagem    String?
-  conteudo     String?
+  conteudo     String? @db.Text
   publicadaEm  DateTime?
   favoritos    Favorito[]
 }

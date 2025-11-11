@@ -8,6 +8,8 @@ import cors from "cors";
 dotenv.config();
 
 const app = express();
+
+app.use(cors());
 app.use(express.json());
 
 // Rotas 
@@ -18,4 +20,5 @@ app.use("/favoritos", favoritoRoutes);
 // Porta do servidor
 const port = process.env.PORT || 4000;
 app.listen(port, () => console.log(` Servidor rodando na porta ${port}`));
-app.use(cors());
+
+//app.use(cors({ origin: "http://localhost:8081" })); // ou a porta que o expo web usa
