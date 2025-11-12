@@ -17,3 +17,17 @@ export const criarNoticia = async (req: Request, res: Response) => {
     res.status(400).json({ error: "Erro ao criar notícia" });
   }
 };
+
+export const getNoticiaById = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const noticia = await prisma.noticia.findUnique({
+    where: { id: Number(id) },
+  });
+
+  if (!noticia) {
+    return res.status(404).json({ error: "Notícia não encontrada" });
+  }
+
+  res.json(noticia);
+};
+
