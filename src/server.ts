@@ -21,4 +21,4 @@ app.use("/favoritos", favoritoRoutes);
 const port = process.env.PORT || 4000;
 app.listen(port, () => console.log(` Servidor rodando na porta ${port}`));
 
-//app.use(cors({ origin: "http://localhost:8081" })); // ou a porta que o expo web usa
+//app.use(cors({ origin: "http://localhost:8081" })); // 

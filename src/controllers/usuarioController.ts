@@ -40,7 +40,7 @@ export const login = async (req: Request, res: Response) => {
 
     const token = jwt.sign({ id: usuario.id }, "segredo123", { expiresIn: "1d" });
 
-    // ✅ Retorna apenas os dados seguros e padronizados
+    //  Retorna apenas dados seguros 
     res.json({
       message: "Login realizado com sucesso",
       token,
